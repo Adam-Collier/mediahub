@@ -25,10 +25,9 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
-# Generic
+# Base
 	- Normalize
 	- Box sizing
-# Base
 	- Typography
 	- Elements
 	- Links
@@ -42,28 +41,13 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	- Media
 	- Captions
 	- Galleries
-# plugins
-	- Jetpack infinite scroll
 # Utilities
 	- Accessibility
-	- Alignments
-
---------------------------------------------------------------*/
-
-// Import variables and mixins.
-@import "abstracts/abstracts";
 
 /*--------------------------------------------------------------
-# Generic
+# Variables
 --------------------------------------------------------------*/
-
-/* Normalize
---------------------------------------------- */
-@import "generic/normalize";
-
-/* Box sizing
---------------------------------------------- */
-@import "generic/box-sizing";
+@import "variables";
 
 /*--------------------------------------------------------------
 # Base
@@ -73,8 +57,12 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # Layouts
 --------------------------------------------------------------*/
-// @import "layouts/content-sidebar"; // Uncomment this line for a sidebar on right side of your content.
-// @import "layouts/sidebar-content"; // Uncomment this line for a sidebar on left side of your content.
+@import "layout/layout";
+
+/*--------------------------------------------------------------
+# Pages
+--------------------------------------------------------------*/
+@import "pages/pages";
 
 /*--------------------------------------------------------------
 # Components
@@ -82,21 +70,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 @import "components/components";
 
 /*--------------------------------------------------------------
-# Plugins
---------------------------------------------------------------*/
-
-/* Jetpack infinite scroll
---------------------------------------------- */
-@import "plugins/jetpack/infinite-scroll";
-
-/*--------------------------------------------------------------
-# Utilities
---------------------------------------------------------------*/
-
 /* Accessibility
 --------------------------------------------- */
-@import "utilities/accessibility";
+@import "accessibility";
 
-/* Alignments
+/*--------------------------------------------------------------
+/* Blocks
 --------------------------------------------- */
-@import "utilities/alignments";
+@import "blocks/blocks.scss"
