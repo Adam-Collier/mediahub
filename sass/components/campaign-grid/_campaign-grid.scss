@@ -1,0 +1,36 @@
+.campaign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.grid-item {
+    position: relative;  
+    border: 1px solid var(--primary-black);
+    margin:0 -1px -1px 0;  
+
+    .grid-item-title  {
+        z-index: 1;
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+        font-size: var(--text-base);
+        padding: 0.25rem 0.5rem;
+        background: var(--primary-black);
+        text-decoration: none;
+        color: var(--primary-white);
+    }
+
+    .img-placeholder {
+        position: relative;
+        padding-top: 113%;
+
+        img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
