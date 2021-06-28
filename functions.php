@@ -178,3 +178,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Add a custom handelbars helper
+ */
+function if_equals_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'ifEq', function( $arg1, $arg2, $options ) {
+        return ($arg1 === $arg2) ? $options[fn]() : $options[inverse]();
+    });
+}
+
+add_action( 'lzb/handlebars/object', 'if_equals_handlebars_helper' );
