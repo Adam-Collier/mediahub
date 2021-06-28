@@ -1,0 +1,35 @@
+.site {
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-areas:
+		"header"
+		"main"
+		"footer";
+}
+
+.site-header {
+	grid-area: header;
+}
+
+.site-main {
+	grid-area: main;
+	overflow: hidden; /* Resolves issue with <pre> elements forcing full width. */
+}
+
+.site-header, .site-main{
+	max-width: var(--width-lg);
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1rem;
+}
+
+.widget-area {
+	grid-area: sidebar;
+}
+
+.site-footer {
+	grid-area: footer;
+}
+
+@import "header";
