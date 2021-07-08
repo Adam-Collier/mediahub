@@ -1,9 +1,9 @@
 /*!
-Theme Name: mediahub
+Theme Name: Mediahub
 Theme URI: http://underscores.me/
 Author: Adam Collier
 Author URI: https://github.com/Adam-Collier
-Description: Missguided\'s Mediahub
+Description: Missguided's Mediahub
 Version: 1.0.0
 Tested up to: 5.4
 Requires PHP: 5.6
@@ -47,34 +47,34 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 # Variables
 --------------------------------------------------------------*/
-@import "variables";
+@import 'variables';
 
 /*--------------------------------------------------------------
 # Base
 --------------------------------------------------------------*/
-@import "base/base";
+@import 'base/base';
 
 /*--------------------------------------------------------------
 # Layouts
 --------------------------------------------------------------*/
-@import "layout/layout";
+@import 'layout/layout';
 
 /*--------------------------------------------------------------
 # Pages
 --------------------------------------------------------------*/
-@import "pages/pages";
+@import 'pages/pages';
 
 /*--------------------------------------------------------------
 # Components
 --------------------------------------------------------------*/
-@import "components/components";
+@import 'components/components';
 
 /*--------------------------------------------------------------
 /* Accessibility
 --------------------------------------------- */
-@import "accessibility";
+@import 'accessibility';
 
 /*--------------------------------------------------------------
 /* Blocks
 --------------------------------------------- */
-@import "blocks/blocks.scss"
+@import 'blocks/blocks.scss';
