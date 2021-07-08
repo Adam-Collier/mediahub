@@ -1,8 +1,8 @@
 {
-  "name": "underscores",
+  "name": "mediahub",
   "version": "1.0.0",
-  "description": "Hi. I'm a starter theme called _s, or underscores, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.",
-  "author": "Automattic Theme Team",
+  "description": "The Missguided Mediahub theme",
+  "author": "Adam Collier",
   "license": "GPL-2.0-or-later",
   "keywords": [
     "WordPress",
@@ -17,9 +17,14 @@
     "url": "https://github.com/Automattic/_s/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/register": "^7.14.5",
     "@wordpress/scripts": "^12.1.0",
-    "browser-sync": "^2.26.14",
+    "browser-sync": "^2.27.4",
+    "del": "^6.0.0",
     "dir-archiver": "^1.1.1",
+    "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "gulp-postcss": "^9.0.0",
     "gulp-rename": "^2.0.0",
@@ -43,7 +48,8 @@
     "map": false
   },
   "scripts": {
-    "dev": "gulp",
+    "dev": "gulp start",
+    "build": "gulp build",
     "watch": "node-sass sass/ -o ./ --source-map true --output-style expanded --indent-type tab --indent-width 1 -w",
     "compile:css": "node-sass sass/ -o ./ && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
     "compile:rtl": "rtlcss style.css style-rtl.css",
