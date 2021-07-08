@@ -10,29 +10,26 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
-
+	<main id="post" class="site-main">
 		<?php
 		while ( have_posts() ) :
 			the_post();
 
-			get_template_part( 'template-parts/content', get_post_type() );
+			the_content();
 
+			$chevronLeft = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+
+			$chevronRight = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+			
 			the_post_navigation(
 				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'mediahub' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'mediahub' ) . '</span> <span class="nav-title">%title</span>',
+					'prev_text' => '<span class="nav-title">' . $chevronLeft . '%title</span>',
+					'next_text' => '<span class="nav-title">%title' . $chevronRight. '</span>',
 				)
 			);
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
 		endwhile; // End of the loop.
 		?>
-
+		<div class="copy-toast">Copied to clipboard!</div><!-- .copy-toast -->
 	</main><!-- #main -->
 
 <?php
