@@ -152,6 +152,13 @@ function mediahub_scripts() {
 add_action( 'wp_enqueue_scripts', 'mediahub_scripts' );
 
 /**
+ * Add editor styles
+ */
+add_theme_support( 'editor-styles' );
+add_editor_style('editor-styles.css');
+
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
@@ -179,12 +186,88 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
+ * Add the copyToClipboard script for all of the posts
+ */
+
+if ( is_singular() ) {
+	// $modifiedDate  = date("ymd-Gis", filemtime( plugin_dir_path( __FILE__ ) . 'js/copy-to-clipboard.js' ));
+}
+
+function copy_to_clipboard_script () {
+	wp_enqueue_script( 'copy-to-clipboard', get_template_directory_uri() . '/js/copy-to-clipboard.js', array(), "1.0.0", true );
+}
+
+add_action( 'wp_enqueue_scripts', 'copy_to_clipboard_script' );
+
+/**
  * Add a custom handelbars helper
  */
 function if_equals_handlebars_helper ( $handlebars ) {
     $handlebars->registerHelper( 'ifEq', function( $arg1, $arg2, $options ) {
-        return ($arg1 === $arg2) ? $options[fn]() : $options[inverse]();
+        return ($arg1 === $arg2) ? $options['fn']() : $options['inverse']();
     });
 }
 
 add_action( 'lzb/handlebars/object', 'if_equals_handlebars_helper' );
+
+/**
+ * Add a custom handelbars helper to display territories
+ * The general idea is taken from this example: https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Helper/EachHelper.php
+ */
+
+function terr_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'terr', function( $arg1, $options ) {
+		// all of the territories we want to show
+		$territories = ["AU", "DE", "ES", "EU", "FR", "IE", "PL", "UK", "US"];
+
+		$buffer = "";
+
+		$context = $options['context'];
+		$template = $options['template'];
+
+		foreach($territories as $territory) {
+			if(in_array($territory, $arg1)){
+				$context->push(array("territory" => $territory, "active" => true));
+			} else {
+				$context->push(array("territory" => $territory, "active" => false));
+			}
+
+			$buffer .= $template->render($context);
+		}
+
+		return $buffer;
+    });
+}
+
+add_action( 'lzb/handlebars/object', 'terr_handlebars_helper' );
+
+function modified_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'modified', function( $options ) {
+
+		$buffer = "";
+
+		$context = $options['context'];
+		$template = $options['template'];
+
+		$author = get_the_modified_author();
+		$date = get_the_modified_date();
+
+		$context->push(array("author" => $author, "date" => $date));
+
+		$buffer .= $template->render($context);
+
+		return $buffer;
+    });
+}
+
+add_action( 'lzb/handlebars/object', 'modified_handlebars_helper' );
+
+function copy_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'copy', function( $options ) {
+		$html = '<svg onClick="copyToClipboard(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+
+		return new \Handlebars\SafeString($html);
+    });
+}
+
+add_action( 'lzb/handlebars/object', 'copy_handlebars_helper' );
