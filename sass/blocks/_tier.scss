@@ -1,0 +1,18 @@
+.campaign-tier {
+  color: var(--color);
+  border: 2px solid var(--color);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+
+  &.bronze {
+    --color: #d38842;
+  }
+  &.silver {
+    --color: #979797;
+  }
+  &.gold {
+    --color: #e7c757;
+  }
+}
