@@ -1,35 +1,42 @@
 .site {
-	display: grid;
-	grid-template-columns: auto;
-	grid-template-areas:
-		"header"
-		"main"
-		"footer";
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
 }
 
 .site-header {
-	grid-area: header;
+  grid-area: header;
 }
 
 .site-main {
-	grid-area: main;
-	overflow: hidden; /* Resolves issue with <pre> elements forcing full width. */
+  grid-area: main;
+  overflow: hidden; /* Resolves issue with <pre> elements forcing full width. */
 }
 
-.site-header, .site-main{
-	max-width: var(--width-lg);
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 1rem;
+.site-header,
+.site-main {
+  max-width: var(--width-lg);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
 }
 
 .widget-area {
-	grid-area: sidebar;
+  grid-area: sidebar;
 }
 
 .site-footer {
-	grid-area: footer;
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  color: var(--grey-2);
+  font-size: var(--text-sm);
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 }
 
-@import "header";
+@import 'header';
