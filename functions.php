@@ -271,3 +271,15 @@ function copy_handlebars_helper ( $handlebars ) {
 }
 
 add_action( 'lzb/handlebars/object', 'copy_handlebars_helper' );
+
+/**
+ * Add more images sizes to we can create some responsive images
+ */
+
+ function add_image_sizes() {
+	add_image_size( 'campaign-0.5x', 165, 186.5 );
+    add_image_size( 'campaign', 330, 373 );
+	add_image_size( 'campaign-1.5x', 495, 559.5 );	
+	add_image_size( 'campaign-2x', 660, 746 );
+}
+add_action( 'after_setup_theme', 'add_image_sizes' );
