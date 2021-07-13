@@ -6,7 +6,10 @@
  *
  * @package mediahub
  */
-
+ $campaignID = get_the_ID();
+ $thumbnailID = get_post_thumbnail_id($campaignID);
+ $campaignAlt = get_post_meta($campaignID, '_wp_attachment_image_alt', true);
+ $campaignSrcset = wp_get_attachment_image_srcset($thumbnailID, 'large');
 ?>
 
 <article class="grid-item">
@@ -17,7 +20,12 @@
             ?>
         </header><!-- .entry-header -->
         <div class="img-placeholder">
-            <?php mediahub_post_thumbnail(); ?>
+            <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" 
+                alt="<?php echo $campaignAlt; ?>" 
+                srcset="<?php echo $campaignSrcset; ?>" 
+                sizes="(max-width: 768px) 50vw, (max-width: 1440px) 23vw, 23vw"
+            />
         </div>
     </a>
 </article><!-- .grid-item ?> -->
