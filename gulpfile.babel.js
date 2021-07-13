@@ -16,23 +16,23 @@ import del from 'del';
 let exec = util.promisify(child_process.exec);
 
 const scss = () => {
-	const plugins = [
-		presetEnv( {
-			autoprefixer: {
-				flexbox: 'no-2009',
-			},
-			stage: 3,
-			features: {
-				'custom-properties': false,
-			},
-		} ),
-	];
+  const plugins = [
+    presetEnv({
+      autoprefixer: {
+        flexbox: 'no-2009',
+      },
+      stage: 3,
+      features: {
+        'custom-properties': false,
+      },
+    }),
+  ];
 
-	return src( './sass/style.scss' )
-		.pipe( sass() )
-		.pipe( postcss( plugins ) )
-		.pipe( rename( 'style.css' ) )
-		.pipe( dest( './', { overwrite: true } ) );
+  return src('./sass/style.scss')
+    .pipe(sass())
+    .pipe(postcss(plugins))
+    .pipe(rename('style.css'))
+    .pipe(dest('./', { overwrite: true }));
 };
 
 export const compress = async () => {
@@ -65,15 +65,16 @@ export const compress = async () => {
 };
 
 const server = (done) => {
-	browserSync.init( {
-		proxy: 'http://mediahub.test/',
-	} );
-	done();
+  browserSync.init({
+    proxy: 'http://mediahub.test/',
+    open: false,
+  });
+  done();
 };
 
-const reload = ( done ) => {
-	browserSync.reload();
-	done();
+const reload = (done) => {
+  browserSync.reload();
+  done();
 };
 
 const cleanDir = () => del(['dist']);
