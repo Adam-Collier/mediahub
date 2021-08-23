@@ -34,6 +34,6 @@
 		<!-- .site-branding -->
 
 		<?php if (is_single() && get_lzb_meta( 'tier' )): ?>
-			<p class="heading campaign-tier <?php echo get_lzb_meta( 'tier' )?>"><?php echo get_lzb_meta( 'tier' )?></p>
+			<p class="heading campaign-tier <?php echo explode(" ", get_lzb_meta( 'tier' ))[0]?>"><?php echo get_lzb_meta( 'tier' )?></p>
 		<?php endif ;?>
 	</header><!-- #masthead -->
