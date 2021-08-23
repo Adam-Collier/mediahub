@@ -90,17 +90,29 @@
       grid-column: 1/-1;
     }
   }
+
   .campaign-product-tracker {
     grid-area: tracker;
     display: grid;
 
     a {
+      word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
+    &.disabled {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      font-size: 1.25rem;
+      color: var(--grey-2);
+      background: var(--grey-1);
+    }
   }
+
   .campaign-treatment {
     grid-area: treatment;
     display: flex;
