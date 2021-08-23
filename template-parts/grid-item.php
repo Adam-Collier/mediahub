@@ -26,12 +26,16 @@
         </header><!-- .entry-header -->
             <p class="grid-item-status <?php echo strtolower(explode(' ', get_lzb_meta( 'status' ))[0])?>"><?php echo get_lzb_meta( 'status' ) ?></p>
         <div class="img-placeholder">
-            <img
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" 
-                alt="<?php echo $campaignAlt; ?>" 
-                srcset="<?php echo $campaignSrcset; ?>" 
-                sizes="(max-width: 768px) 50vw, (max-width: 1440px) 23vw, 23vw"
-            />
+            <?php if (has_post_thumbnail()): ?>
+                <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" 
+                    alt="<?php echo $campaignAlt; ?>" 
+                    srcset="<?php echo $campaignSrcset; ?>" 
+                    sizes="(max-width: 768px) 50vw, (max-width: 1440px) 23vw, 23vw"
+                />
+            <?php else: ?>
+                <img src=<?php echo default_thumbnail(); ?> alt="default thumbnail" />
+            <?php endif; ?>
         </div>
     </a>
 </article><!-- .grid-item ?> -->

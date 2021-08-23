@@ -289,6 +289,16 @@ function status_handlebars_helper ( $handlebars ) {
 
 add_action( 'lzb/handlebars/object', 'status_handlebars_helper' );
 
+function default_image_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'default-image', function() {
+		$img = default_thumbnail();
+		$html = "<img src='$img' alt='default thumbnail' />";
+		return new \Handlebars\SafeString($html);
+    });
+}
+
+add_action( 'lzb/handlebars/object', 'default_image_handlebars_helper' );
+
 /**
  * Add more images sizes to we can create some responsive images
  */
@@ -300,3 +310,10 @@ add_action( 'lzb/handlebars/object', 'status_handlebars_helper' );
 	add_image_size( 'campaign-2x', 660, 746 );
 }
 add_action( 'after_setup_theme', 'add_image_sizes' );
+
+// if there's no thumbnail add a fallback
+function default_thumbnail()
+{
+  $default_img = get_template_directory_uri() . '/img/default-thumbnail.svg';
+  return $default_img;
+}
