@@ -147,6 +147,24 @@
   .campaign-copy {
     grid-area: copy;
   }
+
+  // standardise the spacing and layout for launch notes and subcopy
+  // in future if there is more copy standardise for all elements
+  .campaign-launch-notes * + *,
+  .campaign-sub-copy * + * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .campaign-launch-notes * + *,
+  .campaign-sub-copy * + * {
+    margin-top: 0.5rem;
+  }
+
+  .campaign-launch-notes li,
+  .campaign-sub-copy li {
+    margin-top: 0;
+  }
 }
 @media (max-width: 767px) {
   .campaign-content {
