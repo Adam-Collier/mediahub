@@ -36,11 +36,12 @@ const scss = () => {
 };
 
 export const compress = async () => {
-  let date = new Date().toISOString().replace('T', ' ').substr(0, 10);
-  let fileName = `mediahub_${date}`;
+  // let date = new Date().toISOString().replace('T', ' ').substr(0, 10);
+  let themeName = `mediahub`;
+  let tempName = `mediahub_temp`
 
   // copy the babezine folder outside babezine (can't copy inside)
-  await fs.copy(path.resolve(__dirname, './'), `../${fileName}`, {
+  await fs.copy(path.resolve(__dirname, './'), `../${tempName}`, {
     overwrite: true,
     filter: (path) => {
       return ![
@@ -55,13 +56,13 @@ export const compress = async () => {
     },
   });
 
-  await fs.move(`../${fileName}`, `./dist/${fileName}`, {
+  await fs.move(`../${tempName}`, `./dist/${themeName}`, {
     overwrite: true,
   });
 
-  await exec(`cd dist && zip -r ${fileName}.zip ${fileName}`);
+  await exec(`cd dist && zip -r ${themeName}.zip ${themeName}`);
 
-  await fs.remove(`./dist/${fileName}`);
+  await fs.remove(`./dist/${themeName}`);
 };
 
 const server = (done) => {
