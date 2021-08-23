@@ -2,6 +2,8 @@
   display: grid;
   grid-template-areas: 'title image' 'modified image' 'territories image' 'launch image' 'tracker copy' 'treatment copy';
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(min-content, max-content);
+
   section {
     > * {
       + {
@@ -11,16 +13,14 @@
       }
     }
   }
-  > section {
+  margin-top: 0.5px;
+
+  > * {
     padding: var(--padding);
     border: 1px solid var(--primary-black);
     margin: -0.5px;
   }
-  > a {
-    padding: var(--padding);
-    border: 1px solid var(--primary-black);
-    margin: -0.5px;
-  }
+
   .campaign-title {
     grid-area: title;
   }
@@ -46,7 +46,7 @@
     p {
       margin: 0;
       font-size: var(--text-sm);
-      color: var(--grey-2);
+      color: var(--grey-3);
     }
   }
   .territories {
@@ -85,22 +85,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
-    .campaign-launch-notes {
+    .campaign-launch-notes,
+    .campaign-name {
       grid-column: 1/-1;
-    }
-    .campaign-launch-date {
-      margin-top: 0;
     }
   }
   .campaign-product-tracker {
     grid-area: tracker;
     display: grid;
-    grid-template-columns: 3rem 1fr;
-    grid-gap: 1rem;
-    align-items: center;
-    div {
-      margin: 0;
-    }
+
     a {
       display: -webkit-box;
       -webkit-line-clamp: 1;
@@ -113,6 +106,7 @@
     display: flex;
     align-items: center;
     display: flex;
+    justify-content: center;
     text-decoration: none;
     color: var(--primary-black);
     font-size: var(--text-3xl);
@@ -129,6 +123,12 @@
       -webkit-text-decoration: revert;
       text-decoration: revert;
     }
+
+    &.disabled {
+      font-size: 1.25rem;
+      color: var(--grey-2);
+      background: var(--grey-1);
+    }
   }
   .campaign-image {
     grid-area: image;
@@ -139,6 +139,7 @@
       left: 0;
       width: 100%;
       height: 100%;
+      margin: 0;
       -o-object-fit: cover;
       object-fit: cover;
     }
