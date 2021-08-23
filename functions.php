@@ -241,18 +241,23 @@ function terr_handlebars_helper ( $handlebars ) {
 
 add_action( 'lzb/handlebars/object', 'terr_handlebars_helper' );
 
-function modified_handlebars_helper ( $handlebars ) {
-    $handlebars->registerHelper( 'modified', function( $options ) {
+function post_meta_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'meta', function( $options ) {
 
 		$buffer = "";
 
 		$context = $options['context'];
 		$template = $options['template'];
+	
+		$lock = get_post_meta( get_the_id(), '_edit_lock', true );
+		$lock = explode( ':', $lock );
+		$user = isset( $lock[1] ) ? $lock[1] : NULL;
 
-		$author = get_the_modified_author();
+		$author = get_userdata($user)->display_name;
 		$date = get_the_modified_date();
+		$title = get_the_title();
 
-		$context->push(array("author" => $author, "date" => $date));
+		$context->push(array("author" => $author, "date" => $date, "title" => $title));
 
 		$buffer .= $template->render($context);
 
@@ -260,7 +265,7 @@ function modified_handlebars_helper ( $handlebars ) {
     });
 }
 
-add_action( 'lzb/handlebars/object', 'modified_handlebars_helper' );
+add_action( 'lzb/handlebars/object', 'post_meta_handlebars_helper' );
 
 function copy_handlebars_helper ( $handlebars ) {
     $handlebars->registerHelper( 'copy', function( $options ) {
@@ -271,6 +276,18 @@ function copy_handlebars_helper ( $handlebars ) {
 }
 
 add_action( 'lzb/handlebars/object', 'copy_handlebars_helper' );
+
+function status_handlebars_helper ( $handlebars ) {
+    $handlebars->registerHelper( 'status', function() {
+		$value = get_lzb_meta( 'status' );
+		$class = strtolower(explode(' ', get_lzb_meta( 'status' ))[0]);
+		$html = "<p class='grid-item-status $class'>$value</p>";
+		
+		return new \Handlebars\SafeString($html);
+    });
+}
+
+add_action( 'lzb/handlebars/object', 'status_handlebars_helper' );
 
 /**
  * Add more images sizes to we can create some responsive images
