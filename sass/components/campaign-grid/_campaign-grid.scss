@@ -3,21 +3,65 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
+// dont nest this so we can reuse in the campaign page
+.grid-item-status {
+  --color: #000;
+  --background: #fff;
+  display: inline-block;
+  color: var(--color);
+  background: var(--background);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  border-radius: 2px;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
+  font-weight: 600;
+
+  &.upcoming {
+    --color: hsl(0, 100%, 30%);
+    --background: hsl(0, 100%, 80%);
+  }
+
+  &.assets {
+    --color: hsl(60, 100%, 30%);
+    --background: hsl(60, 100%, 80%);
+  }
+
+  &.live {
+    --color: hsl(120, 100%, 18.8%);
+    --background: hsl(120, 100%, 82.9%);
+  }
+}
+
 .grid-item {
   position: relative;
   border: 1px solid var(--primary-black);
   margin: 0 -1px -1px 0;
 
-  .grid-item-title {
+  .grid-item-header {
     z-index: 1;
     position: absolute;
     left: 1rem;
     bottom: 1rem;
+  }
+
+  .grid-item-title {
+    display: inline-block;
     font-size: var(--text-base);
     padding: 0.25rem 0.5rem;
     background: var(--primary-black);
     text-decoration: none;
     color: var(--primary-white);
+  }
+
+  .grid-item-launching {
+    background: var(--primary-black);
+    color: var(--primary-white);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
   }
 
   .img-placeholder {
